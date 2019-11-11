@@ -1,0 +1,51 @@
+
+<h2>Список товарів</h2>
+
+<div class="topnav" style="margin-bottom: 15px;">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-2">
+            <a>Title</a>
+        </div>
+        <div class="col-2">
+            <a>Description</a>
+        </div>
+        <div class="col-2">
+            <a>Price</a>
+        </div>
+        <div class="col-5">
+            <input type="text" placeholder="Search.." [(ngModel)]="searchText">
+        </div>
+    </div>
+</div>
+
+    <div *ngFor="let product of products  | filter:searchText">
+        <div class="row hoverList" style="margin-bottom: 10px">
+            <div class="col-1">
+                <img style="width: 75px; height: 50px;" src="{{product.image}}" alt="{{product.title}}">
+            </div>
+            <div class="col-2">
+                <h3>
+                    <a [title]="product.title">
+                        {{ product.title }}
+                    </a>
+                </h3>
+            </div>
+            <div class="col-2">
+                <p *ngIf="product.description">
+                    {{ product.description }}
+                </p>
+            </div>
+            <div class="col-2">
+                <p *ngIf="product.price">
+                    {{ product.price }}$
+                </p>
+            </div>
+            <div class="col-5">
+                <button class="button button1" [routerLink]="['/cart', { id: product.id, title: product.title, description: product.description, image: product.image, price: product.price }]">
+                    Add to cart
+                </button>
+            </div>
+        </div>
+    </div>
+
